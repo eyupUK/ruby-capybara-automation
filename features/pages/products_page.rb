@@ -36,6 +36,13 @@ class ProductsPage < SitePrism::Page
         sleep 2
         retry
       else
+        # Debug: Print current state when button not found
+        puts "ERROR: Button ##{button_id} not found for product '#{name}'"
+        puts "Current URL: #{page.current_url}"
+        puts "Available add-to-cart buttons:"
+        all('[id^="add-to-cart-"]').each do |btn|
+          puts "  - #{btn[:id]}"
+        end
         raise
       end
     end

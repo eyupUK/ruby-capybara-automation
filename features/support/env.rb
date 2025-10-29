@@ -33,8 +33,20 @@ Capybara.register_driver :selenium_chrome_headless do |app|
   opts.add_argument('--no-sandbox')
   opts.add_argument('--disable-dev-shm-usage')
   opts.add_argument('--window-size=1920,1080')
+  opts.add_argument('--disable-infobars')              # hides “Chrome is being controlled by automated test software”
+opts.add_argument('--ignore-certificate-errors')     # ignore SSL cert warnings
+opts.add_argument('--disable-extensions')            # ensure no Chrome extensions run
+opts.add_argument('--disable-notifications')         # suppress web push notifications
+
+
+  # 🧩 Disable Chrome password manager & “Change password” infobar
+  opts.add_argument('--disable-password-generation')
+  opts.add_argument('--disable-save-password-bubble')
+  opts.add_argument('--disable-features=PasswordManagerOnboarding,PasswordChange,PasswordLeakDetection')
+
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: opts)
 end
+
 
 # Register UI-visible driver (non-headless)
 Capybara.register_driver :selenium_chrome_ui do |app|
@@ -43,7 +55,17 @@ Capybara.register_driver :selenium_chrome_ui do |app|
   opts.add_argument('--no-sandbox')
   opts.add_argument('--disable-dev-shm-usage')
   opts.add_argument('--window-size=1920,1080')
+  opts.add_argument('--disable-infobars')              # hides “Chrome is being controlled by automated test software”
+opts.add_argument('--ignore-certificate-errors')     # ignore SSL cert warnings
+opts.add_argument('--disable-extensions')            # ensure no Chrome extensions run
+opts.add_argument('--disable-notifications')         # suppress web push notifications
+
   # No --headless argument = browser will be visible
+    # 🧩 Disable Chrome password manager & “Change password” infobar
+  opts.add_argument('--disable-password-generation')
+  opts.add_argument('--disable-save-password-bubble')
+  opts.add_argument('--disable-features=PasswordManagerOnboarding,PasswordChange,PasswordLeakDetection')
+
   Capybara::Selenium::Driver.new(app, browser: :chrome, options: opts)
 end
 
@@ -55,6 +77,16 @@ Capybara.register_driver :selenium_chrome_debug do |app|
   opts.add_argument('--disable-dev-shm-usage')
   opts.add_argument('--window-size=1920,1080')
   opts.add_argument('--start-maximized')
+  opts.add_argument('--disable-infobars')              # hides “Chrome is being controlled by automated test software”
+  opts.add_argument('--ignore-certificate-errors')     # ignore SSL cert warnings
+  opts.add_argument('--disable-extensions')            # ensure no Chrome extensions run
+  opts.add_argument('--disable-notifications')         # suppress web push notifications
+
+  # 🧩 Disable Chrome password manager & “Change password” infobar
+  opts.add_argument('--disable-password-generation')
+  opts.add_argument('--disable-save-password-bubble')
+  opts.add_argument('--disable-features=PasswordManagerOnboarding,PasswordChange,PasswordLeakDetection')
+
   driver = Capybara::Selenium::Driver.new(app, browser: :chrome, options: opts)
   # Add pause after each action for demonstration
   driver.browser.manage.timeouts.implicit_wait = 1
