@@ -1,0 +1,13 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'features/**/*.rb'

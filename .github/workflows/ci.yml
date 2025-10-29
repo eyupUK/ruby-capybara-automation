@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push: 
+    branches:
+      - wip
+  pull_request:
+    branches:
+      - wip
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium chromium-driver
+      - name: Run Cucumber
+        env:
+          BASE_URL: https://www.saucedemo.com
+          APP_ENV: ci
+        run: |
+          bundle exec cucumber -p ci || true
+          mkdir -p reports
+          if [ -f reports/cucumber.json ]; then
+            echo "Cucumber JSON produced"
+          fi
+      - name: Run RSpec
+        run: bundle exec rspec

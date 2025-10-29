@@ -1,0 +1,3 @@
+base_url: https://www.saucedemo.com
+browser: :selenium_chrome_debug
+implicit_wait: 5

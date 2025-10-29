@@ -1,0 +1,4 @@
+default: --format pretty --publish-quiet --require features --tags 'not @wip' --strict-undefined --color
+ci: --format progress --format json --out reports/cucumber.json --publish-quiet --require features --tags 'not @wip' --strict-undefined
+smoke: --tags @smoke
+wip: --tags @wip

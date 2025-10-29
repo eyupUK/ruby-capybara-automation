@@ -1,0 +1,12 @@
+/.bundle
+/vendor
+/tmp
+/log
+/.env
+/reports
+/.idea
+/.vscode
+/*.log
+**/*.swp
+coverage/
+Gemfile.lock

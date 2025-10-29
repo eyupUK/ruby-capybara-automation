@@ -1,0 +1,11 @@
+services:
+  test:
+    build: .
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - BASE_URL=${BASE_URL:-https://www.saucedemo.com}
+      - APP_ENV=ci
+    shm_size: '1gb'
+    # network_mode: "host" # uncomment on Linux for host network
